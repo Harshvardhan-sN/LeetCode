@@ -6,20 +6,7 @@ public:
         int n = seats.size();
         
         if(ind==n-1)    return n-1;
-        // if(count(seats.begin(),seats.end(),1)==1){
-        //     int cc=0,flag=0;
-        //     for(int i=0;i<n;i++){
-        //         if(seats[i]==0){
-        //             cc++;
-        //             flag = cc;
-        //         }
-        //         else{
-        //             cc=0;
-        //         }
-        //         flag = max(flag,cc);
-        //     }
-        //     return flag;
-        // }
+      
         int ans1=0,ans2=0;
         int currentpos = ind;
         
