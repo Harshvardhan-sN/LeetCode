@@ -10,10 +10,8 @@ public:
         for(auto &it:queries){
             int i = it[0];
             int j = it[1];
-            if(i){
-                v1.push_back((arr[j]^arr[i-1]));
-            }
-            if(!i)    v1.push_back(arr[j]);
+            if(i)   v1.push_back((arr[j]^arr[i-1]));            
+            else    v1.push_back(arr[j]);
         }
         return v1;
     }
