@@ -10,21 +10,15 @@ class Solution{
 public:	
 	
 	int shortestDistance(vector<string> &s, string word1, string word2){
-	    vector<int> v1,v2;
-	    int i = 0;
+	    long start = -1,end = -1;
+	    
 	    long ans1 = INT_MAX;
-	    for(auto &it:s){
-	        if(it==word1)       v1.push_back(i);
-	        if(it==word2)       v2.push_back(i);
-	        i++;
+	    for(int i=0;i<s.size();i++){
+	        if(s[i]==word1)     start = i;
+	        if(s[i]==word2)     end = i;
+	        if(start!=-1 and end!=-1)   ans1 = min(ans1,abs(start-end));
 	    }
-	    int n = v1.size();
-	    int m = v2.size();
-	    for(int i = 0;i<n;i++){
-	        for(int j = 0;j<m;j++){
-	            ans1 = min(ans1,long(abs(v1[i]-v2[j])));
-	        }
-	    }
+	    
 	    return  ans1;
 	}
 };
