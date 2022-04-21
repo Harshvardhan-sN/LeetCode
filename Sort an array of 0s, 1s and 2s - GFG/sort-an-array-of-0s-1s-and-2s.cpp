@@ -10,16 +10,14 @@ class Solution
     public:
     void sort012(int a[], int n)
     {
-        long zero = 0,one = 0,two = 0;
+        map<int,int> m1;
         for(int i = 0;i < n; i++){
-            if(a[i]==0)     zero++;
-            else if(a[i]==1)    one++;
-            else        two++;
+            m1[a[i]]++;
         }
-        int i = 0;
-        while(zero--)   a[i++]=0;   
-        while(one--)    a[i++]=1;
-        while(two--)    a[i++]=2;
+        int j = 0;
+        for(auto &it:m1){
+            for(int i = 0;i<it.second;i++)  a[j++] = it.first;
+        }
     }
     
 };
