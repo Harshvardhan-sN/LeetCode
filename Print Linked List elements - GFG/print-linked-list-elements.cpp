@@ -30,7 +30,7 @@ class Solution
     public:
     void display(Node *head)
     {
-        while(head!=NULL){
+        while(head){
             cout<<head->data<<" ";
             head = head->next;
         }
