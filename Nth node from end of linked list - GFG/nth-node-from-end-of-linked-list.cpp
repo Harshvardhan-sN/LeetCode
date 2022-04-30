@@ -58,8 +58,8 @@ int main()
   }
 };
 */
-long len(Node* head){
-	long c = 0;
+int len(Node* head){
+	int c = 0;
 	while(head!=NULL){
 	    c++;
 	    head = head->next;
@@ -70,9 +70,9 @@ long len(Node* head){
 int getNthFromLast(Node *head, int n)
 {
     if(n>len(head)) return -1;
-    long size = len(head)-n+1;
+    int size = len(head)-n+1;
     Node* temp = head;
-	for(long i=0;i<size-1;i++){
+	for(int i=0;i<size-1;i++){
 		temp = temp->next;
 	}
 	return temp->data;
