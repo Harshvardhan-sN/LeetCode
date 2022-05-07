@@ -1,15 +1,21 @@
 class Solution {
+private:
+    int fun(vector<int> &v1,int start,int end,int x){
+        int ans = 0;
+        while(start<=end){
+            int mid = start+(end-start)/2;
+            if(v1[mid]>=x){
+                end = mid-1;
+            }
+            else       start = mid+1;
+        }
+        return start;
+    }
 public:
     int searchInsert(vector<int>& nums, int target) {
-        auto it=find(begin(nums),end(nums),target);
-        int ans=it-nums.begin();
-        auto low=lower_bound(begin(nums),end(nums),target);
-        int ind=low-nums.begin();
-        
-        if(it!=nums.end()){
-            return ans;
-        }
-        return ind;
-        
+        int l = 0;
+        int r = nums.size()-1;
+        // return fun(nums,l,r,target);
+        return lower_bound(nums.begin(),nums.end(),target) - nums.begin();
     }
 };
