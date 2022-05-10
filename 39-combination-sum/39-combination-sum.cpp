@@ -1,7 +1,7 @@
 class Solution {
     vector<vector<int>> ans;
 private:
-    void sum(int index,int target,vector<int> help,vector<int> &v1){
+    void sum(int index,int target,vector<int> &help,vector<int> &v1){
         if(index==help.size()){
             if(target==0)   ans.push_back(v1);
             return;
