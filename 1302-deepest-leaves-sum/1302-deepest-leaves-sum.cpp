@@ -11,6 +11,7 @@
  */
 class Solution {
     int sum = 0;    
+    int maxi = 0;
 private:
     int depth(TreeNode* node){
         if(node==NULL){
@@ -19,18 +20,24 @@ private:
         return 1+max(depth(node->left),depth(node->right));
     }
 public:
-    void total_sum(TreeNode* node,int curr,int d){
+    void total_sum(TreeNode* node,int curr){
         if(node!=NULL){
-            if(curr==d)     sum += node->val;
-            total_sum(node->left,curr+1,d);
-            total_sum(node->right,curr+1,d);
+            if(curr>maxi){
+                sum = 0;
+                maxi = curr;
+            }
+            if(curr==maxi){
+                sum += node->val;
+            }
+            total_sum(node->left,curr+1);
+            total_sum(node->right,curr+1);
         }
     }
 public:
     int deepestLeavesSum(TreeNode* root) {
         if(root==NULL)      return 0;
-        int max_depth = depth(root);
-        total_sum(root,1,max_depth);
+        // int max_depth = depth(root);
+        total_sum(root,1);
         return sum;
     }
 };
