@@ -25,9 +25,10 @@
 
 // // DP ITRATIVE:
 class Solution {
-    int dp[107][107];
 public:
     int findMaxForm(vector<string>& strs, int m, int n) {
+        int dp[m+1][n+1];
+        memset(dp,0,sizeof dp);
         for(auto &it:strs){
             int zero = count(it.begin(),it.end(),'0');
             int one = count(it.begin(),it.end(),'1');
