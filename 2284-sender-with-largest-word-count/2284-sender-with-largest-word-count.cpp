@@ -1,30 +1,34 @@
 class Solution {
 public:
-string largestWordCount(vector<string> & m, vector<string> & sd) {
-        int msz= m.size();
-        map<string, int> mp;
-        set<string> st;
-        set<string> st2;
-        for(int i=0; i<msz; i++){
-            int sz= m[i].length();
-            int ct=1;
-            for(int j=0; j<sz; j++)
-            {
-                if(m[i][j]==' ')
-                    ct++;
-            }    
-            mp[sd[i]] += ct;
-        }    
-        int mx=0;
-        for(auto it= mp.begin(); it!=mp.end(); it++){
-            if(it->second > mx)
-                mx = it->second;
+    string largestWordCount(vector<string>& messages, vector<string>& senders) {
+        map<string,int> m1;
+        int maxi = 0;
+		
+        for(int i=0;i<senders.size();i++){
+			// min. no. of words per sender
+            int req = 1;
+			
+			// count spaces
+            for(auto &it:messages[i])   if(it==' ') req++;
+            
+			// insert it into map
+			m1[senders[i]] += req;
+			
+			// get the max value in map
+            maxi = max(maxi,m1[senders[i]]);
         }
-        for(auto it= mp.begin(); it!=mp.end(); it++){
-            if(it->second==mx){
-                st.insert(it->first);
-            }    
+		// using set for highest order string
+		set<string> s1;
+		
+        for(auto &it:m1){
+		
+            // string correponding to max value of map
+			if(it.second==maxi){
+                s1.insert(it.first);
+            }
         }
-        return *(--st.end());
+		
+		// last element of set
+        return *(--s1.end());
     }
 };
