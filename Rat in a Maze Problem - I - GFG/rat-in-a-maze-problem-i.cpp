@@ -9,34 +9,22 @@ using namespace std;
 // User function template for C++
 
 bool visited[7][7];
+int dx[4] = {1,0,0,-1};
+int dy[4] = {0,-1,1,0};
 void fun(int i,int j,vector<vector<int>> &v1,int n,string help,vector<string> &ans){
     if(i==n-1 and j==n-1){
         ans.push_back(help);
         return;
     }
-    // Downward
-    if(i+1<n and !visited[i+1][j] and v1[i+1][j]){
-        visited[i][j] = 1;
-        fun(i+1,j,v1,n,help+'D',ans);
-        visited[i][j] = 0;
-    }
-    // Left
-    if(j-1>=0 and !visited[i][j-1] and v1[i][j-1]){
-        visited[i][j] = 1;
-        fun(i,j-1,v1,n,help+'L',ans);
-        visited[i][j] = 0;
-    }
-    // Right
-    if(j+1<n and !visited[i][j+1] and v1[i][j+1]){
-        visited[i][j] = 1;
-        fun(i,j+1,v1,n,help+'R',ans);
-        visited[i][j] = 0;
-    }
-    // Up
-    if(i-1>=0 and !visited[i-1][j] and v1[i-1][j]){
-        visited[i][j] = 1;
-        fun(i-1,j,v1,n,help+'U',ans);
-        visited[i][j] = 0;
+    string direction = "DLRU";
+    for(int ind=0;ind<4;ind++){
+        int X = i+dx[ind];
+        int Y = j+dy[ind];
+        if(X>=0 && Y>=0 && X<n && Y<n and !visited[X][Y] and v1[X][Y]){
+            visited[i][j] = 1;
+            fun(X,Y,v1,n,help+direction[ind],ans);
+            visited[i][j] = 0;
+        }
     }
 }
 class Solution{
