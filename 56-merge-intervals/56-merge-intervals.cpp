@@ -9,11 +9,11 @@ public:
                 help[1] = max(help[1],it[1]);
             }
             else{
-                v1.push_back(help);
+                v1.emplace_back(help);
                 help = it;
             }
         }
-        v1.push_back(help);
+        v1.emplace_back(help);
         return v1;
     }
 };
