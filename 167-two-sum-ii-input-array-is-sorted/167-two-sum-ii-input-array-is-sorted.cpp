@@ -1,18 +1,20 @@
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& arr, int T) {
-        int n = arr.size();
-        vector<int> ans;
-        
-        for(int i=0;i<n;i++){
-            int req = T-arr[i];
-            if(binary_search(arr.begin()+i+1,arr.end(),req)){
-                int index = lower_bound(arr.begin()+i+1,arr.end(),req) - arr.begin();
-                ans.push_back(i+1);
-                ans.push_back(index+1);
-                break;
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        int n = numbers.size();
+        int i=0;
+        int j=n-1;
+        vector<int> v1;
+        while( ( numbers[i]+numbers[j] ) != target ){
+            if(numbers[i]+numbers[j]>target){
+                j--;
+            }
+            else if(numbers[i]+numbers[j]<target){
+                i++;
             }
         }
-        return ans;
+        v1.emplace_back(i+1);
+        v1.emplace_back(j+1);
+        return v1;
     }
 };
