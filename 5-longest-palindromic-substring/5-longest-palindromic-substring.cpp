@@ -2,7 +2,7 @@ class Solution {
 public:
     string longestPalindrome(string s) {
         int maxLen = 0;
-        string result = "";
+        int L = 0, R = 0;
         int n = s.length();
         
         // Odd
@@ -12,7 +12,8 @@ public:
                 int len = (x<<1) + 1;
                 if(len > maxLen){
                     maxLen = len;
-                    result = s.substr(mid-x,len);
+                    L = mid - x;
+                    R = len;
                 }
             }
         }
@@ -23,10 +24,11 @@ public:
                 int len = (x<<1);
                 if(len > maxLen){
                     maxLen = len;
-                    result = s.substr(mid-x+1,len);
+                    L = mid - x + 1;
+                    R = len;
                 }
             }
         }
-        return result;
+        return s.substr(L,R);
     }
 };
