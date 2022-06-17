@@ -12,7 +12,7 @@
 class Solution {
 private:
     int ans = 0;
-    unordered_set<TreeNode*> s1;
+    set<TreeNode*> s1;
     void dfs(TreeNode *node, TreeNode* parent){
         if(node){
             dfs(node->left,node);
