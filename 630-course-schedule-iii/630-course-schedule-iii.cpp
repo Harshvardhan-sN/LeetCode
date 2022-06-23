@@ -5,22 +5,23 @@ public:
     }
     int scheduleCourse(vector<vector<int>>& courses) {
         sort(courses.begin(),courses.end(),cmp);
-        priority_queue<int> p1;
+        multiset<int> p1;
         int time = 0;
         
         for(auto &it : courses){
             int duration = it[0] , lastDay = it[1];
             if(duration <= lastDay){
                 if( duration+time <= lastDay ){
-                    p1.push(duration);
+                    p1.insert(duration);
                     time += duration;
                 }
                 else{
-                    if(p1.top() > duration){
-                        time -= p1.top();
-                        p1.pop();
+                    auto it = p1.rbegin();
+                    if(*it > duration){
+                        time -= *it;
+                        p1.erase(--p1.end());
                         time += duration;
-                        p1.push(duration);
+                        p1.insert(duration);
                     }
                 }
             }
