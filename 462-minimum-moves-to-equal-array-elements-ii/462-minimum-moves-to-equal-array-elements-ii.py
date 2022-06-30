@@ -4,5 +4,8 @@ class Solution:
         l1 = v1[len(v1)>>1]
         ans1 = 0
         for i in v1:
-            ans1 += abs(l1-i)
+            if l1>i:
+                ans1 += l1-i
+            else:
+                ans1 += i-l1
         return ans1
