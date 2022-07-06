@@ -1,0 +1,13 @@
+class Solution {
+private:
+    int fun(int n,vector<int> &dp){
+        if (n<=1)   return n;
+        if (dp[n]!=-1)      return dp[n];
+        return dp[n] = fun(n-1,dp) + fun(n-2,dp);
+    }
+public:
+    int fib(int n) {
+        vector<int> dp(1e7+7,-1);
+        return fun(n,dp);
+    }
+};
