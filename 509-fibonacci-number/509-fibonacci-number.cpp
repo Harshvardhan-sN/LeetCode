@@ -7,7 +7,7 @@ private:
     }
 public:
     int fib(int n) {
-        vector<int> dp(1e7+7,-1);
+        vector<int> dp(1e5+7,-1);
         return fun(n,dp);
     }
 };
