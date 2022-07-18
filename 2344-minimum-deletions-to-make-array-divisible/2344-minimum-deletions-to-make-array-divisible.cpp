@@ -13,8 +13,8 @@ public:
                     break;
                 }
             }
-            if(b1)  break;
+            if(b1)  return ans;
         }
-        return ans==nums.size()?-1:ans;
+        return -1;
     }
 };
