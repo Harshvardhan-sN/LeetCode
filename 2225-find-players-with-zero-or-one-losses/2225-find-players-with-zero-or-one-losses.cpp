@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> findWinners(vector<vector<int>>& ma) {
-        map<int,int> one,two;
+        unordered_map<int,int> two;
         set<int> s1;
         for(auto &it: ma){
             two[it[1]]++;
