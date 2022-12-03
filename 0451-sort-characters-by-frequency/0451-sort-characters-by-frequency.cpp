@@ -4,7 +4,7 @@ public:
         return p1.second>p2.second;
     }
     string frequencySort(string s) {
-        map<char, int> m1;
+        unordered_map<char, int> m1;
         vector<pair<char, int>> v1;
         for(char &ch: s)    m1[ch]++;
         for(auto &[l,r]: m1)    v1.emplace_back(l,r);
