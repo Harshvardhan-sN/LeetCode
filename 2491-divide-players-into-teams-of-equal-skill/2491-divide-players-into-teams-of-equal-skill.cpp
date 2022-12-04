@@ -3,7 +3,7 @@ class Solution {
 public:
     long long dividePlayers(vector<int>& s) {
         sort(begin(s), end(s));
-        unordered_set<ll> s1;
+        set<ll> s1;
         ll ans = 0;
         int l = 0, r = s.size()-1;
         while(l<r){
