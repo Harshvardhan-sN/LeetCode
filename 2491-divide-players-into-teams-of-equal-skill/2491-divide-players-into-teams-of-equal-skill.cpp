@@ -3,15 +3,13 @@ class Solution {
 public:
     long long dividePlayers(vector<int>& s) {
         sort(begin(s), end(s));
-        set<ll> s1;
-        ll ans = 0;
+        ll ans = 0, set = s[0]+s[(int)s.size()-1];
         int l = 0, r = s.size()-1;
         while(l<r){
             ll diff = s[l]+s[r];
-            s1.insert(diff);
             ans += s[l]*s[r];
             l++,r--;
-            if(s1.size()>1)     return -1;
+            if(set != diff)     return -1;
         }
         return ans;
     }
