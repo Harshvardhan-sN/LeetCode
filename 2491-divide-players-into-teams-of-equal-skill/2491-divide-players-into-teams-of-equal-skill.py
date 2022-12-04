@@ -10,4 +10,3 @@ class Solution:
             if req != diff:
                 return -1
         return ans
-        
