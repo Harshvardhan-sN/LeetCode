@@ -11,15 +11,25 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        vector<int> v1;
-        ListNode* curr = head;
-        while(curr!=nullptr){
-            v1.push_back(curr->val);
-            curr = curr->next;
+        ListNode *slow = head, *fast = head;
+        while(fast and fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        int n = v1.size()/2;
-        ListNode* temp = head;
-        while(n--)  temp = temp->next;
-        return temp;
+        return slow;
     }
 };
+// class Solution {
+// public:
+//     ListNode* middleNode(ListNode* head) {
+//         vector<int> v1;
+//         ListNode *curr = head, *temp = head;
+//         while(curr!=nullptr){
+//             v1.push_back(curr->val);
+//             curr = curr->next;
+//         }
+//         int n = v1.size()/2;
+//         while(n--)  temp = temp->next;
+//         return temp;
+//     }
+// };
