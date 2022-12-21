@@ -13,8 +13,8 @@ public:
             for(int col = 0; col < m; col++){
                 if(!vis[row][col] and grid[row][col]=='1'){
                     ans++;
-                    dfs(row, col, n, m, vis, grid);
-                    // bfs(row, col, n, m, vis, grid);
+                    // dfs(row, col, n, m, vis, grid);
+                    bfs(row, col, n, m, vis, grid);
                 }
             }
         }
@@ -23,7 +23,27 @@ public:
 private:
     void dfs(int r, int c, int n, int m, vector<vector<bool>> &vis, vector<vector<char>> &grid){
         vis[r][c] = 1;
-        for(auto &it: grid){
+        for(int i=-1; i<=1; i++){
+            for(int j=-1; j<=1; j++){
+                int Row = r + i;
+                int Col = c + j;
+                if(Row>=0 and Col>=0 and
+                    Row<n and Col<m and
+                    !vis[Row][Col] and grid[Row][Col]=='1'){
+                        dfs(Row, Col, n, m, vis, grid);
+                    }
+            }
+        }
+    }
+    void bfs(int r, int c, int n, int m, vector<vector<bool>> &vis, vector<vector<char>> &grid){
+        vis[r][c] = 1;
+        queue<pair<int, int>> que;
+        que.emplace(r, c);
+        while(!que.empty()){
+            r = que.front().first;
+            c = que.front().second;
+            que.pop();
+            
             for(int i=-1; i<=1; i++){
                 for(int j=-1; j<=1; j++){
                     int Row = r + i;
@@ -31,7 +51,8 @@ private:
                     if(Row>=0 and Col>=0 and
                         Row<n and Col<m and
                         !vis[Row][Col] and grid[Row][Col]=='1'){
-                            dfs(Row, Col, n, m, vis, grid);
+                            vis[Row][Col] = 1;
+                            que.emplace(Row, Col);
                         }
                 }
             }
