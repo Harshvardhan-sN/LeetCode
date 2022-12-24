@@ -13,7 +13,7 @@ class Solution {
             int child = que.front().first;
             int parent = que.front().second;
             que.pop();
-            for(int it: adj[child]){
+            for(int &it: adj[child]){
                 if(parent!=it){
                     if(!vis[it]){
                         que.push({it, child});
@@ -25,12 +25,33 @@ class Solution {
         }
         return 0;
     }
+    bool dfs(int V, int S, vector<int> adj[], vector<bool> vis){
+        stack<pair<int, int>> sta;
+        sta.push({S, -1});
+        vis[S] = 1;
+        while(!sta.empty()){
+            int child = sta.top().first;
+            int parent = sta.top().second;
+            sta.pop();
+            for(int &it: adj[child]){
+                if(parent!=it){
+                    if(!vis[it]){
+                        sta.push({it, child});
+                        vis[it] = 1;
+                    }
+                    else    return 1;
+                }
+            }
+        }
+        return 0;
+    }
   public:
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
         vector<bool> vis(V, 0);
         for(int i=0; i<V; i++){
-            if(bfs(V, i, adj, vis))      return 1;
+            // if(bfs(V, i, adj, vis))         return 1;
+            if(dfs(V, i, adj, vis))         return 1;
         }
         return 0;
     }
