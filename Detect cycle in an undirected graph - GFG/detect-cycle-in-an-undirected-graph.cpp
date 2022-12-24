@@ -5,7 +5,8 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
     private:
-    bool bfs(int V, int source, vector<int> adj[], vector<bool> vis){
+    bool bfs(int V, int source, vector<int> adj[]){
+        vector<bool> vis(V, 0);
         queue<pair<int,int>> que;
         que.push({source, -1});
         vis[source] = 1;
@@ -28,9 +29,8 @@ class Solution {
   public:
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
-        vector<bool> vis(V, 0);
         for(int i=0; i<V; i++){
-            if(bfs(V, i, adj, vis))      return 1;
+            if(bfs(V, i, adj))      return 1;
         }
         return 0;
     }
