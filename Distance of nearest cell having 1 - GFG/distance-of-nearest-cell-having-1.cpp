@@ -36,16 +36,15 @@ class Solution
 	    	for (int i = 0; i < 4; i++) {
 		    	int nRow = R + dx[i];
 			    int mCol = C + dy[i];
-    			if (nRow >= 0 && mCol >= 0 && nRow < n && mCol < m &&
-	    		        grid[nRow][mCol] == 0 ) {
+    			if (nRow >= 0 && mCol >= 0 
+    			&& nRow < n && mCol < m 
+    			&& grid[nRow][mCol] == 0 ) {
 		    		if (!vis[nRow][mCol]) {
 			    		q1.push({nRow, mCol, V});
 				    	vis[nRow][mCol] = 1;
 					    res[nRow][mCol] = V;
     				}
-	    			else {
-		    			res[nRow][mCol] = min(res[nRow][mCol], V);
-			    	}
+	    			
     			}
 	    	}
 	    }
