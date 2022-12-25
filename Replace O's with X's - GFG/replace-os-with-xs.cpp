@@ -48,17 +48,17 @@ void bfs(queue<pair<int, int>> q1, int n, int m, vector<vector<char>> &mat, vect
                 if(!vis[i][j] && mat[i][j]=='O'){
                     res[i][j] = 'O';
                     
-                    // -> bfs
-                    q1.push({i, j});
-                    vis[i][j] = 1;
+                    // // -> bfs
+                    // q1.push({i, j});
+                    // vis[i][j] = 1;
                     
                     // -> dfs
-                    // dfs(i, j, n, m, mat, res, vis);
+                    dfs(i, j, n, m, mat, res, vis);
                 }
             }
         }
     }
-    bfs(q1, n, m, mat, res, vis);
+    // bfs(q1, n, m, mat, res, vis);
     return res;
     }
 };
