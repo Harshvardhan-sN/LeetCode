@@ -21,6 +21,22 @@ void dfs(int r, int c, int n, int m, vector<vector<char>> &mat, vector<vector<ch
         }
     }
 }
+void bfs(queue<pair<int, int>> q1, int n, int m, vector<vector<char>> &mat, vector<vector<char>> &res, vector<vector<bool>> &vis){
+    while(!q1.empty()){
+        int r = q1.front().first;
+        int c = q1.front().second;
+        q1.pop();
+        for(int i=0; i<4; i++){
+            int nR = r + dis[i];
+            int nC = c + dis[i+1];
+            if(nR>=0 and nC>=0 and nR<n and nC<m and !vis[nR][nC] and mat[nR][nC]=='O'){
+                res[nR][nC] = 'O';
+                vis[nR][nC] = 1;
+                q1.push({nR, nC});
+            }
+        }
+    }
+}
     vector<vector<char>> fill(int n, int m, vector<vector<char>> mat)
     {
         vector<vector<bool>> vis(n, vector<bool>(m, 0));
@@ -30,28 +46,19 @@ void dfs(int r, int c, int n, int m, vector<vector<char>> &mat, vector<vector<ch
         for(int j=0; j<m; j++){
             if((i==0 || i==n-1) || (i>0 and i<n-1 and (j==0 || j==m-1))){
                 if(mat[i][j]=='O'){
-                    // q1.push({i, j});
-                    // vis[i][j] = 1;
                     res[i][j] = 'O';
-                    dfs(i, j, n, m, mat, res, vis);
+                    
+                    // -> bfs
+                    q1.push({i, j});
+                    vis[i][j] = 1;
+                    
+                    // -> dfs
+                    // dfs(i, j, n, m, mat, res, vis);
                 }
             }
         }
     }
-    // while(!q1.empty()){
-    //     int r = q1.front().first;
-    //     int c = q1.front().second;
-    //     q1.pop();
-    //     for(int i=0; i<4; i++){
-    //         int nR = r + dis[i];
-    //         int nC = c + dis[i+1];
-    //         if(nR>=0 and nC>=0 and nR<n and nC<m and !vis[nR][nC] and mat[nR][nC]=='O'){
-    //             res[nR][nC] = 'O';
-    //             vis[nR][nC] = 1;
-    //             q1.push({nR, nC});
-    //         }
-    //     }
-    // }
+    bfs(q1, n, m, mat, res, vis);
     return res;
     }
 };
