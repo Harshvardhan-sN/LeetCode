@@ -54,8 +54,8 @@ class Solution {
                     vector<pair<int, int>> vp;
                     pair<int, int> base(i, j);
                     vp.push_back({0, 0});
-                    // dfs(i, j, n, m, grid, vis, vp, base);
-                    bfs(i, j, n, m, grid, vis, vp, base);
+                    dfs(i, j, n, m, grid, vis, vp, base);
+                    // bfs(i, j, n, m, grid, vis, vp, base);
                     s1.insert(vp);
                 }
             }
