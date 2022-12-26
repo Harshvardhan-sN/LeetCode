@@ -11,9 +11,9 @@ class Solution
 	    for(int &child: adj[S]){
 	        if(!vis[child]){
 	            dfs(child, adj, vis, st);
-	            st.push(child);
 	        }
 	    }
+	    st.push(S);
 	}
 	vector<int> topoSort(int V, vector<int> adj[]) {
         vector<bool> vis(V, 0);
@@ -21,7 +21,6 @@ class Solution
         for(int i=0; i<V; i++){
             if(!vis[i]){
                 dfs(i, adj, vis, st);
-                st.push(i);
             }
         }
         vector<int> res;
