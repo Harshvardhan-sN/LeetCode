@@ -8,7 +8,8 @@ class Solution
 	public:
 	//Function to return list containing vertices in Topological order. 
 	vector<int> topoSort(int V, vector<int> adj[]) {
-	    map<int, int> iE;
+	   // map<int, int> iE;
+	    vector<int> iE(V, 0);
 	    queue<int> q1;
 	    for(int i=0; i<V; i++){
 	        for(int &it: adj[i])    iE[it]++;
