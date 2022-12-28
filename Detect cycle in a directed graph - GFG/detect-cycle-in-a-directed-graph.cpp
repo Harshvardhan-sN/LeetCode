@@ -9,9 +9,11 @@ class Solution {
         vis[start] = 1;
         path[start] = 1;
         for(int &i: adj[start]){
+            // not visited 
             if(!vis[i]){
                 if(dfs(i, adj, vis, path))  return 1;
             }
+            // if visited and path_visited then we have find a cycle
             else if(path[i])    return 1;
         }
         path[start] = 0;
@@ -19,14 +21,31 @@ class Solution {
     }
     // Function to detect cycle in a directed graph.
     bool isCyclic(int V, vector<int> adj[]) {
-        vector<bool> vis(V, 0);
-        vector<bool> path(V, 0);
-        for(int i=0; i<V; i++){
-            if(!vis[i]){
-                if(dfs(i, adj, vis, path))  return 1;
-            }
-        }
-        return 0;
+        // vector<bool> vis(V, 0);
+        // vector<bool> path(V, 0);
+        // for(int i=0; i<V; i++){
+        //     if(!vis[i]){
+        //         if(dfs(i, adj, vis, path))  return 1;
+        //     }
+        // }
+        vector<int> InDegree(V, 0);
+	    queue<int> q1;
+	    for(int i=0; i<V; i++){
+	        for(int &it: adj[i])    InDegree[it]++;
+	    }    
+	    for(int i=0; i<V; i++){
+	        if(InDegree[i]==0)    q1.push(i);
+	    }
+	    while(!q1.empty()){
+	        int S = q1.front();
+	        --V;
+	        q1.pop();
+	        for(int &child: adj[S]){
+	            InDegree[child]--;
+	            if(InDegree[child]==0)    q1.push(child);
+	        }
+	    }
+	    return V!=0;
     }
 };
 
