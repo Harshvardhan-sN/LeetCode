@@ -6,20 +6,19 @@ using namespace std;
 class Solution {
 public:
 	bool isPossible(int N, vector<pair<int, int> >& prerequisites) {
-	    map<int, int> inDegree;
+	    vector<int> inDegree(N, 0);
 	    vector<int> adj[N];
 	    for(auto &it: prerequisites){
 	        adj[it.first].push_back(it.second);
 	    }
 	    for(int i=0; i<N; i++){
-	        inDegree[i]+=0;
 	        for(auto &it: adj[i]){
 	            inDegree[it]++;
 	        }
 	    }
 	    queue<int> q1;
-	    for(auto &it: inDegree){
-	        if(it.second==0)    q1.push(it.first);
+	    for(int it=0; it<N; it++){
+	        if(inDegree[it]==0)    q1.push(it);
 	    }
 	    vector<int> res;
 	    while(!q1.empty()){
