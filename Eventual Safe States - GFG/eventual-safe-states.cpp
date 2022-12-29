@@ -10,6 +10,18 @@ using namespace std;
 
 class Solution {
   public:
+    bool dfs(int start, vector<int> adj[], vector<bool> &vis, vector<bool> &path) {
+	    vis[start] = 1;
+	    path[start] = 1;
+    	for (int &i : adj[start]) {
+	    	if (!vis[i]) {
+    			if (dfs(i, adj, vis, path))  return 1;
+		    }
+		    else if (path[i])    return 1;
+	    }
+	    path[start] = 0;
+    	return 0;
+    }
     vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
         vector<int> revAdj[V];
         vector<int> InDegree(V, 0);
