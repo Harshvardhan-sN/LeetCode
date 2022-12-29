@@ -22,7 +22,21 @@ class Solution {
 	    path[start] = 0;
     	return 0;
     }
-    vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
+    vector<int> DoDfs(int V, vector<int> adj[]){
+        vector<bool> vis(V, 0);
+        vector<bool> path(V, 0);
+        for(int i=0; i<V; i++){
+            if(!vis[i]){
+                dfs(i, adj, vis, path);
+            }
+        }
+        vector<int> res;
+        for(int i=0; i<V; i++){
+            if(!path[i])     res.push_back(i);
+        }
+        return res;
+    }
+    vector<int> bfs(int V, vector<int> adj[]){
         vector<int> revAdj[V];
         vector<int> InDegree(V, 0);
         for(int i=0; i<V; i++){
@@ -47,6 +61,10 @@ class Solution {
         }
         sort(res.begin(), res.end());
         return res;
+    }
+    vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
+        // return DoDfs(V, adj);
+        return bfs(V, adj);
     }
 };
 
