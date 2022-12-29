@@ -36,16 +36,20 @@ class Solution {
 	    for(int i=0; i<V; i++){
 	        if(InDegree[i]==0)    q1.push(i);
 	    }
+	    int temp = 0;
 	    while(!q1.empty()){
 	        int S = q1.front();
-	        --V;
+	        temp++;
 	        q1.pop();
 	        for(int &child: adj[S]){
 	            InDegree[child]--;
 	            if(InDegree[child]==0)    q1.push(child);
 	        }
 	    }
-	    return V!=0;
+	    // if topological sort exict then there is no cycle
+	    // .. so we return false
+	    if(temp==V)     return 0;
+	    return 1;
     }
 };
 
