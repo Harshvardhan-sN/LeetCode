@@ -10,31 +10,30 @@ using namespace std;
 
 class Solution {
   public:
-    bool dfs(int start, vector<int> adj[], vector<bool> &vis, vector<bool> &path) {
-	    vis[start] = 1;
-	    path[start] = 1;
-    	for (int &i : adj[start]) {
-	    	if (!vis[i]) {
-    			if (dfs(i, adj, vis, path))  return 1;
-		    }
-		    else if (path[i])    return 1;
-	    }
-	    path[start] = 0;
-    	return 0;
-    }
     vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
-        // code here
-        vector<bool> vis(V, 0);
-        vector<bool> path(V, 0);
+        vector<int> revAdj[V];
+        vector<int> InDegree(V, 0);
         for(int i=0; i<V; i++){
-            if(!vis[i]){
-                dfs(i, adj, vis, path);
-            }
+            for(int &it: adj[i]){
+                revAdj[it].push_back(i);
+                InDegree[i]++;
+            }    
+        }
+        queue<int> q1;
+        for(int i=0; i<V; i++){
+            if(InDegree[i]==0)      q1.push(i);
         }
         vector<int> res;
-        for(int i=0; i<V; i++){
-            if(!path[i])     res.push_back(i);
+        while(!q1.empty()){
+            int from = q1.front();
+            res.push_back(from);
+            q1.pop();
+            for(int &it: revAdj[from]){
+                InDegree[it]--;
+                if(InDegree[it]==0)     q1.push(it);
+            }
         }
+        sort(res.begin(), res.end());
         return res;
     }
 };
