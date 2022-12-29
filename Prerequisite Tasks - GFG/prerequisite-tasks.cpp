@@ -12,7 +12,7 @@ public:
 	    for(auto &it: prerequisites){
 	        // it.first ---> it.second
 	        //    u     --->    v
-	        adj[it.first].push_back(it.second);
+	        adj[it.second].push_back(it.first);
 	    }
 	    // count number of inDegrees for each node
 	    for(int i=0; i<N; i++){
