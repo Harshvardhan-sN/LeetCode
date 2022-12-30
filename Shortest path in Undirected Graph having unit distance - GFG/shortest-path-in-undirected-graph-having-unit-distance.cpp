@@ -9,17 +9,16 @@ using namespace std;
 class Solution {
   public:
     void bfs(vector<int> adj[], vector<int> &path, int src){
-        queue<pair<int, int>> q1;
-        q1.push({src, 0});
+        path[src] = 0;
+        queue<int> q1;
+        q1.push(src);
         while(!q1.empty()){
-            int node = q1.front().first;
-            int cost = q1.front().second;
+            int node = q1.front();
             q1.pop();
             for(auto &child: adj[node]){
                 if(path[child]==103){
-                    int ChildCost = cost + 1;
-                    path[child] = min(path[child], ChildCost);
-                    q1.push({child, path[child]});   
+                    path[child] = path[node]+1;
+                    q1.push(child);
                 }
             }
         }
@@ -32,7 +31,6 @@ class Solution {
             adj[v].push_back(u);
         }
         vector<int> path(N, 103);
-        path[src] = 0;
         bfs(adj, path, src);
         for(auto &it: path){
             if(it==103)     it = -1;
