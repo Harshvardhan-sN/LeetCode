@@ -12,7 +12,7 @@ public:
         vector<vector<string>> path;
         queue<vector<string>> q1;
         q1.push({beginWord});
-        unordered_set<string> st(wordList.begin(), wordList.end());
+        set<string> st(wordList.begin(), wordList.end());
         int level = 0;
         vector<string> del;
         del.push_back(beginWord);
