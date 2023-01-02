@@ -14,8 +14,8 @@ public:
         q1.push({beginWord});
         unordered_set<string> st(wordList.begin(), wordList.end());
         int level = 0;
-        unordered_set<string> del;
-        del.insert(beginWord);
+        vector<string> del;
+        del.push_back(beginWord);
         while(!q1.empty()){
             vector<string> sequence = q1.front();
             q1.pop();
@@ -37,7 +37,7 @@ public:
                         sequence.push_back(tp);
                         q1.push(sequence);
                         sequence.pop_back();
-                        del.insert(tp);
+                        del.push_back(tp);
                     }
                 }
             }
