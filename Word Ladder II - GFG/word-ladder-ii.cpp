@@ -12,7 +12,7 @@ public:
         vector<vector<string>> path;
         queue<vector<string>> q1;
         q1.push({beginWord});
-        set<string> st(wordList.begin(), wordList.end());
+        unordered_set<string> st(wordList.begin(), wordList.end());
         int level = 0;
         vector<string> del;
         del.push_back(beginWord);
@@ -22,6 +22,7 @@ public:
             if(sequence.size() > level){
                 level++;
                 for(auto &it: del)      st.erase(it);
+                del.clear();
             }
             string child = sequence.back();
             if(child==endWord) {
