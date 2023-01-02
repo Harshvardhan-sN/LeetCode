@@ -8,6 +8,34 @@ using namespace std;
 // User function Template for C++
 class Solution {
   public:
+    vector<int> bfs(int N, vector<pair<int, int>> adj[]){
+        vector<int> InDegree(N, 0);
+	    queue<int> q1;
+	    vector<int> path(N, 101);
+    	for(int i=0; i<N; i++){
+		    for(auto &it: adj[i]){
+			    InDegree[it.first]++;
+		    }
+	    }
+    	for(int i=0; i<N; i++){
+	    	if(InDegree[i]==0)		q1.push(i);
+    	}
+	    path[0] = 0;
+    	while(!q1.empty()){
+		    int from = q1.front();
+	    	q1.pop();
+    		int currDist = path[from];
+		    for(auto &it: adj[from]){
+		    	path[it.first] = min(path[it.first], currDist + it.second);
+	    		InDegree[it.first]--;
+    			if(InDegree[it.first]==0)	q1.push(it.first);
+		    }
+	    }
+    	for (auto &it : path) {
+		    if (it == 101)     it = -1;     // if node is not reachable
+	    }
+	    return path;
+    }
     void dfs(int S, vector<int> &vis, vector<pair<int, int>> adj[], stack<int> &st){
         vis[S] = 1;
         for(auto &it: adj[S]){
@@ -17,13 +45,9 @@ class Solution {
         }
         st.push(S);
     }
-    vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
+    vector<int> DoDfs(int N, vector<pair<int, int>> adj[]){
         stack<int> st;
-        vector<pair<int, int>> adj[N];
         vector<int> vis(N, 0), path(N, 101);
-        for(auto &it: edges){
-            adj[it[0]].push_back({it[1],it[2]});
-        }
         for(int i=0; i<N; i++){
             if(!vis[i]){
                 dfs(i, vis, adj, st);
@@ -42,6 +66,14 @@ class Solution {
             if(it==101)     it = -1;
         }
         return path;
+    }
+    vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
+        vector<pair<int, int>> adj[N];
+        for(auto &it: edges){
+            adj[it[0]].push_back({it[1],it[2]});
+        }
+        return bfs(N, adj);
+        return DoDfs(N, adj);
     }
 };
 
