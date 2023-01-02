@@ -10,17 +10,18 @@ public:
         unordered_set<string> words(wordList.begin(), wordList.end());
         queue<pair<string, int>> q1;
         q1.emplace(startWord, 1);
+        words.erase(startWord);
         while(!q1.empty()){
             string from = q1.front().first;
-            int path = q1.front().second;
+            int cost = q1.front().second;
             q1.pop();
-            if(from == targetWord)  return path;
+            if(from == targetWord)  return cost;
             for(int i=0; i<from.size(); i++){
                 string temp = from;
                 for(char ch='a'; ch<='z'; ch++){
                     temp[i] = ch;
                     if(words.find(temp)!=words.end()){
-                        q1.emplace(temp, path+1);
+                        q1.emplace(temp, cost+1);
                         words.erase(temp);
                     }
                 }
