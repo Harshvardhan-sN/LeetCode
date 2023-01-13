@@ -1,5 +1,5 @@
 class DataStream {
-    unordered_map<int, int> m1;
+    map<int, int> m1;
     int val, size;
 public:
     DataStream(int value, int k) {
