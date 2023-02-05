@@ -9,32 +9,14 @@ class Solution
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S){
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> st;
-        st.emplace(0, S);
-        vector<int> paths(V, 1e9);
-        paths[S] = 0;
-        while(st.size()){
-            int cost = st.top().first;
-            int node = st.top().second;
-            st.pop();
-            for(auto &it: adj[node]){
-                int newCost = cost + it[1];
-                if(newCost < paths[it[0]]){
-                    paths[it[0]] = newCost;
-                    st.emplace(newCost, it[0]);
-                }
-            }
-        }
-        return paths;
-        // set<pair<int, int>> st;
+        // priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> st;
         // st.emplace(0, S);
         // vector<int> paths(V, 1e9);
         // paths[S] = 0;
         // while(st.size()){
-        //     auto it = st.begin();
-        //     int cost = it->first;
-        //     int node = it->second;
-        //     st.erase(it);
+        //     int cost = st.top().first;
+        //     int node = st.top().second;
+        //     st.pop();
         //     for(auto &it: adj[node]){
         //         int newCost = cost + it[1];
         //         if(newCost < paths[it[0]]){
@@ -44,6 +26,26 @@ class Solution
         //     }
         // }
         // return paths;
+        set<pair<int, int>> st;
+        st.emplace(0, S);
+        vector<int> paths(V, 1e9);
+        paths[S] = 0;
+        while(st.size()){
+            auto it = st.begin();
+            int cost = it->first;
+            int node = it->second;
+            st.erase(it);
+            for(auto &it: adj[node]){
+                int newCost = cost + it[1];
+                if(newCost < paths[it[0]]){
+                    if(paths[it[0]]!=1e9)
+                        st.erase({paths[it[0]], it[0]});
+                    paths[it[0]] = newCost;
+                    st.emplace(newCost, it[0]);
+                }
+            }
+        }
+        return paths;
     }
 };
 
