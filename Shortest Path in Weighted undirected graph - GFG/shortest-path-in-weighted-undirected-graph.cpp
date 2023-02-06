@@ -33,6 +33,7 @@ class Solution {
                 int newCost = cost + neighbour[1];
                 int goToNode = neighbour[0];
                 if(newCost < initialCost[goToNode]){
+                    if(initialCost[goToNode] != 1e9)    st.erase({initialCost[goToNode], goToNode});
                     initialCost[goToNode] = newCost;
                     path[goToNode] = node;
                     st.emplace(newCost, goToNode);
