@@ -5,7 +5,7 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    void dfs(int S, int E, unordered_map<int, int> &path, vector<int> &res){
+    void dfs(int S, int E, vector<int> &path, vector<int> &res){
         if(S == E)      return;
         dfs(path[S], E, path, res);
         res.push_back(S);
@@ -21,7 +21,8 @@ class Solution {
         vector<int> initialCost(n+1, 1e9);
         initialCost[1] = 0;
         st.emplace(0, 1);
-        unordered_map<int, int> path;
+        // unordered_map<int, int> path;
+        vector<int> path(n+1, 0);
         path[1] = 1;
         while(st.size()){
             auto it = st.begin();
@@ -38,7 +39,7 @@ class Solution {
                 }
             }
         }
-        if(!path.count(n))    return {-1};
+        if(path[n]==0)    return {-1};
         vector<int> res;
         res.push_back(1);
         dfs(n, 1, path, res);
