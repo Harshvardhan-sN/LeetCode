@@ -10,7 +10,7 @@ int dy[4] = {0, -1, 0, 1};
 bool isValidDirection(int X, int Y, int n, int m) {return (X >= 0 && Y >= 0 && X < n && Y < m);}
   public:
     int MinimumEffort(vector<vector<int>>& heights){
-        int n = heights.size(), m = heights[0].size(), res = INT_MAX;
+        int n = heights.size(), m = heights[0].size();
     priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> pq;
     pq.push({0, {0, 0}});
     vector<vector<int>> distance(n, vector<int> (m, 1e9));
@@ -20,8 +20,7 @@ bool isValidDirection(int X, int Y, int n, int m) {return (X >= 0 && Y >= 0 && X
         int x = pq.top().second.first, y = pq.top().second.second;
         pq.pop();
         if(x == n - 1 and y == m - 1){
-            res = min(res, currEffort);
-            continue;
+            return currEffort;
         }
         for(int i = 0; i < 4; i++){
             int X = x + dx[i];
@@ -35,7 +34,7 @@ bool isValidDirection(int X, int Y, int n, int m) {return (X >= 0 && Y >= 0 && X
             }
         }
     }
-    return res;
+    return 0;
     }
 };
 
