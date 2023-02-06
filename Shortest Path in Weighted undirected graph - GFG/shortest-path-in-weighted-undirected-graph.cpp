@@ -6,13 +6,9 @@ using namespace std;
 class Solution {
   public:
     void dfs(int S, int E, unordered_map<int, int> &path, vector<int> &res){
-        if(S == E){
-            res.push_back(1);
-            reverse(res.begin(), res.end());
-            return;
-        }
-        res.push_back(S);
+        if(S == E)      return;
         dfs(path[S], E, path, res);
+        res.push_back(S);
     }
     vector<int> shortestPath(int n, int m, vector<vector<int>>& edges) {
         set<pair<int, int>> st;
@@ -44,6 +40,7 @@ class Solution {
         }
         if(!path.count(n))    return {-1};
         vector<int> res;
+        res.push_back(1);
         dfs(n, 1, path, res);
         return res;
     }
