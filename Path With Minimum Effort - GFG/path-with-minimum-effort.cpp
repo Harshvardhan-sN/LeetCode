@@ -20,7 +20,8 @@ bool isValidDirection(int X, int Y, int n, int m) {return (X >= 0 && Y >= 0 && X
         int x = pq.top().second.first, y = pq.top().second.second;
         pq.pop();
         if(x == n - 1 and y == m - 1){
-            res = 
+            res = min(res, currEffort);
+            continue;
         }
         for(int i = 0; i < 4; i++){
             int X = x + dx[i];
@@ -34,7 +35,7 @@ bool isValidDirection(int X, int Y, int n, int m) {return (X >= 0 && Y >= 0 && X
             }
         }
     }
-    return 0;
+    return res;
     }
 };
 
