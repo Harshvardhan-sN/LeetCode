@@ -1,6 +1,7 @@
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
+        if(nums.size() > 1 and nums[0] == 0)    return 0;
         int n = nums.size() - 1;
         for(int i = n; i >= 0; i--)
             if(i + nums[i] >= n)
