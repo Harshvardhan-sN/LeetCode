@@ -3,7 +3,8 @@ public:
     bool canJump(vector<int>& nums) {
         int reachable = 0, n = nums.size();
         for(int i = 0; i < n - 1; i++){
-            if(i > reachable)   return 0;
+            if(i > reachable)   
+                return 0;
             if(nums[i] + i > reachable)
                 reachable = nums[i] + i;
         }
