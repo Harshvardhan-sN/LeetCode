@@ -9,14 +9,15 @@ class Solution {
         vector<pair<int, int>> adj[n];
         for(auto &it: flights)
             adj[it[0]].push_back({it[1], it[2]});
-        priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> q1;
+        queue<pair<int, pair<int, int>>> q1;
+        // priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> q1;
         q1.push({0, {src, -1}});
         int res = 1e9;
         set<pair<pair<int, int>, int>> st;
         while(q1.size()){
-            int node = q1.top().second.first;
-            int step = q1.top().second.second;
-            int cost = q1.top().first;
+            int node = q1.front().second.first;
+            int step = q1.front().second.second;
+            int cost = q1.front().first;
             q1.pop();
             if(step <= k and node == dst){
                 res = min(res, cost);
