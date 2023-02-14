@@ -15,17 +15,16 @@ class Solution {
     vector<int> bellman_ford(int V, vector<vector<int>>& edges, int S) {
         vector<int> cost(V, 1e8);
         cost[S] = 0;
-        bool b1 = 0;
         for(int i = 0; i < V; i++){
             for(auto &it: edges){
                 int u = it[0], v = it[1], w = it[2];
                 if(w + cost[u] < cost[v]){
                     cost[v] = cost[u] + w;
-                    if(i == V - 1)  b1 = 1;
+                    if(i == V - 1)  
+                        return {-1};
                 }
             }
         }
-        if(b1)     return {-1};
         return cost;
     }
 };
