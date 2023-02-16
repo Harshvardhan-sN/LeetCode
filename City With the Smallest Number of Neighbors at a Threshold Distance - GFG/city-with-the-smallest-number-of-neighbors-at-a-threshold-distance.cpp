@@ -31,7 +31,7 @@ class Solution {
         }
         return st.size();
     }
-    int findCity(int n, int m, vector<vector<int>>& edges,int distanceThreshold) {
+    int funDijkstra(int n, vector<vector<int>>& edges,int distanceThreshold){
         vector<vector<int>> adj[n];
         for(auto &it: edges){
             adj[it[0]].push_back({it[1], it[2]});
@@ -43,6 +43,40 @@ class Solution {
             if(Mini <= currMin){
                 currCity = max(currCity, i);
                 currMin = Mini;
+            }
+        }
+        return currCity;
+    }
+    int findCity(int n, int m, vector<vector<int>>& edges,int distanceThreshold) {
+        // Dijkstra
+        // return funDijkstra(n, edges, distanceThreshold);
+        
+        // FloydWarshall
+        vector<vector<int>> path(n, vector<int>(n, 1e9));
+        for(auto &it: edges){
+            path[it[0]][it[1]] = it[2];
+            path[it[1]][it[0]] = it[2];
+        }
+        for(int i = 0; i < n; i++)  path[i][i] = 0;
+        int currMin = 1e9, currCity = -1;
+        for(int k = 0; k < n; k++){
+            for(int i = 0; i < n; i++){
+                for(int j = 0; j < n; j++){
+                    if(path[i][k] == 1e9 || path[k][j] == 1e9)
+                        continue;
+                    path[i][j] = min(path[i][j], path[i][k] + path[k][j]);
+                }
+            }
+        }
+        for(int i = 0; i < n; i++){
+            int cnt = 0;
+            for(int j = 0; j < n; j++){
+                if(path[i][j] <= distanceThreshold)
+                    cnt++;
+            }
+            if(cnt <= currMin){
+                currCity = max(currCity, i);
+                currMin = cnt;
             }
         }
         return currCity;
