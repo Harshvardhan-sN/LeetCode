@@ -52,22 +52,24 @@ public:
 class Solution {
   public:
     int Solve(int n, vector<vector<int>>& edge) {
-        int m = edge.size(), res = 0, extra = 0;
+        int m = edge.size(), numberOfComponents = 0, extraEdges = 0;
         DisjointSet ds(n);
         for(auto &it: edge){
             int u = it[0], v = it[1];
-            if(ds.findPar(u) != ds.findPar(v))
+            if(ds.findPar(u) != ds.findPar(v)){
                 ds.unionRank(u, v);
+            }
             else
-                ++extra;
+                ++extraEdges;
         }
         for(int i = 0; i < n; i++){
             if(ds.parent[i] == i)
-                res++;
+                numberOfComponents++;
         }
-        if(res - 1 > extra)
+        int totalMinReqEdges = numberOfComponents - 1;
+        if(totalMinReqEdges > extraEdges)
             return -1;
-        return res - 1; 
+        return totalMinReqEdges; 
     }
 };
 
